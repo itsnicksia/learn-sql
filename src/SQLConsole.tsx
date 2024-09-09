@@ -6,9 +6,6 @@ import {ColDef} from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
 import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
 
-
-// -> { rows: [ { message: "Hello world" } ] }
-
 export function SQLConsole() {
   let queryBuffer = "";
   const [query, setQuery] = useState<string>("");
@@ -26,11 +23,13 @@ export function SQLConsole() {
       setRows(result.rows);
       setColDefs(result.fields.map(field => ({"field": field.name} as ColDef)));
       console.log(result);
-
-
     }
 
-    void executeQuery();
+      executeQuery().catch(err => {
+        if (err instanceof Error) {
+          console.log(err);
+        }
+      });
   }, [db, query]);
 
   // Check the result
@@ -56,7 +55,7 @@ export function SQLConsole() {
           height: "200px",
         }}
       />
-      <button onClick={() => setQuery(queryBuffer)}>Execute!</button>
+      <button onClick={() => { if (queryBuffer != "") { setQuery(queryBuffer) } } } >Execute!</button>
       <h3>{ isSolved ? "Solved!" : "Not Solved"}</h3>
       <div
         className="ag-theme-quartz-auto-dark" // applying the Data Grid theme
