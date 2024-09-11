@@ -1,0 +1,9 @@
+{
+  "migrations": [],
+  "title": "Act 1: Learning SQL",
+  "blurb": "Run a query that just returns a single row with a single column that has the value \"1\".",
+  "navigation": ["test-problem.json"],
+  "expected": [
+    ["1"]
+  ]
+}

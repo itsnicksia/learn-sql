@@ -1,13 +1,31 @@
 import './App.css'
-import {SQLConsole} from './SQLConsole.tsx'
+import {ProblemView} from "./ProblemView.tsx";
+import {useEffect, useState} from "react";
+
+import {problemIndex} from "./problem-index.ts";
+import {Problem} from "./problem.ts";
 
 function App() {
+  const [problemPath, setProblemPath] = useState(problemIndex.first);
+  const [problem, setProblem] = useState<Problem | null>(null);
+
+  useEffect(() => {
+    async function loadProblem(path: string) {
+      const response = await fetch(`problems/${path}`);
+      setProblem(await response.json() as Problem);
+    }
+
+    void loadProblem(problemPath)
+  }, [problemPath]);
   return (
     <>
       <div style={{width: "100%", height: "800px"}}>
-        <h1>Act 1: Learning SQL</h1>
-        <h2>Run a query that just returns a single row with a single column that has the value "1".</h2>
-        <SQLConsole/>
+        {
+          problem
+          ? <ProblemView setProblemPath={setProblemPath} problem={problem} />
+          : <div>No problem... loaded.</div>
+        }
+
       </div>
     </>
   )
