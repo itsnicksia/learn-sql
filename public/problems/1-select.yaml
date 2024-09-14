@@ -85,7 +85,7 @@ steps:
   # Objective: Teach "WHERE"
   - blurb: |
       What if we only like "normal" rock?
-      
+
       Try:
 
       ```
@@ -102,4 +102,3 @@ steps:
       13,The Eagles,Don Henley,Rock
 
     outcome: Well done.
-
