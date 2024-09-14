@@ -5,10 +5,17 @@ import { useEffect, useState } from "react";
 import { problemIndex } from "./config/problem-index.ts";
 import { Problem } from "./types/problem.ts";
 import * as yaml from "js-yaml";
+import { PGlite } from "@electric-sql/pglite";
+import loadDb from "./hooks/load-database.ts";
 
 function App() {
+  const [db, setDb] = useState<PGlite | null>(null);
   const [problemPath, setProblemPath] = useState(problemIndex.first);
   const [problem, setProblem] = useState<Problem | null>(null);
+
+  useEffect(() => {
+    !db && void loadDb(setDb);
+  }, [db]);
 
   useEffect(() => {
     async function loadProblem(path: string) {
@@ -21,12 +28,8 @@ function App() {
   }, [problemPath]);
   return (
     <>
-      <div style={{ width: "100%", height: "800px" }}>
-        {problem ? (
-          <ProblemView setProblemPath={setProblemPath} problem={problem} />
-        ) : (
-          <div>No problem... loaded.</div>
-        )}
+      <div style={{ height: "50%" }}>
+        {db ? problem && <ProblemView setProblemPath={setProblemPath} problem={problem} db={db} /> : "Loading..."}
       </div>
     </>
   );

@@ -1,26 +1,19 @@
-import { SQLView } from "./SQLView.tsx";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { PGlite } from "@electric-sql/pglite";
 import { Problem } from "../types/problem.ts";
-import ReactMarkdown from "react-markdown";
-import loadDb from "../hooks/load-database.ts";
 import { Repl } from "@electric-sql/pglite-repl";
 import { DEBUG, PROBLEM_SCHEMA } from "../config.ts";
+import { DebugToolbar } from "./DebugToolbar.tsx";
+import { ProblemStepView } from "./ProblemStepView.tsx";
 
 interface Props {
   problem: Problem;
   setProblemPath: Dispatch<SetStateAction<string>>;
+  db: PGlite;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function ProblemView({ problem, setProblemPath }: Props) {
-  const [db, setDb] = useState<PGlite | null>(null);
-  const [isSolved, setIsSolved] = useState(false);
+export function ProblemView({ problem, setProblemPath, db }: Props) {
   const [stepIndex, setStepIndex] = useState(0);
-
-  useEffect(() => {
-    !db && void loadDb(setDb);
-  }, [db]);
 
   /*
   Make sure everything's cleaned up before we start the next problem.
@@ -39,8 +32,6 @@ export function ProblemView({ problem, setProblemPath }: Props) {
   }, [db, problem]);
 
   function onNextClicked() {
-    setIsSolved(false);
-
     if (!problem.steps) {
       // We've likely hit a terminal point - do nothing.
     } else if (stepIndex < problem.steps.length - 1) {
@@ -55,43 +46,9 @@ export function ProblemView({ problem, setProblemPath }: Props) {
 
   return (
     <>
-      {DEBUG && (
-        <div>
-          <button onClick={onNextClicked}>debug: Next</button>
-        </div>
-      )}
+      {DEBUG && <DebugToolbar onNextClicked={onNextClicked} />}
       <h2>{problem.title}</h2>
-      <div>
-        {isSolved && currentStep ? (
-          <div>
-            <h3>Solved!</h3>
-            <ReactMarkdown children={currentStep.outcome} />
-          </div>
-        ) : (
-          currentStep && <h3>Not Solved</h3>
-        )}
-        <button disabled={!isSolved} onClick={onNextClicked}>
-          Next
-        </button>
-      </div>
-      {currentStep ? (
-        <ReactMarkdown children={currentStep.blurb} />
-      ) : (
-        "Uhh, here's a REPL."
-      )}
-      {db ? (
-        currentStep ? (
-          <SQLView
-            db={db}
-            setIsSolved={setIsSolved}
-            expectedRows={currentStep.expectedRows}
-          />
-        ) : (
-          <Repl pg={db} />
-        )
-      ) : (
-        <div>Loading...</div>
-      )}
+      {currentStep ? <ProblemStepView db={db} currentStep={currentStep} onNextClicked={onNextClicked} /> : <Repl pg={db} />}
     </>
   );
 }

@@ -54,7 +54,7 @@ steps:
       14,The Doors,Jim Morrison,Psychedelic Rock
       15,Radiohead,Thom Yorke,Alternative Rock
     outcome: Well done! You can read _and_ write!
-  # Objective: Teach "SELECT" *
+  # Objective: Teach "SELECT" - column
   - blurb: |
       The "`*`" in `select * from bands` means "everything" 
 
@@ -80,3 +80,36 @@ steps:
       The Eagles
       The Doors
       Radiohead
+
+    outcome: Well done.
+  # Objective: Teach "WHERE"
+  - blurb: |
+      What if we only like "normal" rock?
+      
+      Try:
+
+      ```
+        select * 
+        from bands
+        where genre = 'Rock'
+      ```
+
+    expectedRows: |
+      The Beatles
+      Queen
+      The Rolling Stones
+      Led Zeppelin
+      Nirvana
+      Pink Floyd
+      AC/DC
+      Metallica
+      U2
+      Coldplay
+      Red Hot Chili Peppers
+      Foo Fighters
+      The Eagles
+      The Doors
+      Radiohead
+
+    outcome: Well done.
+

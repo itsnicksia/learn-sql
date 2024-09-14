@@ -5,7 +5,7 @@ export interface Problem {
   navigation: Navigation;
 }
 
-interface ProblemStep {
+export interface ProblemStep {
   blurb: string;
   expectedRows: string;
   outcome: string;

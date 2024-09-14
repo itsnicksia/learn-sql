@@ -21,9 +21,7 @@ export function SQLView({ db, setIsSolved, expectedRows }: Props) {
   const [rowData, setRowData] = useState<unknown[]>([]);
   const [colDefs, setColDefs] = useState<ColDef<unknown>[]>([]);
 
-  const [result, setResult] = useState<Results<
-    Record<string, string>
-  > | null>();
+  const [result, setResult] = useState<Results<Record<string, string>> | null>();
 
   // Execute the query
   useEffect(() => {
@@ -40,9 +38,7 @@ export function SQLView({ db, setIsSolved, expectedRows }: Props) {
           if (result) {
             setRowData(result.rows);
             setResult(result);
-            setColDefs(
-              result.fields.map((field) => ({ field: field.name }) as ColDef),
-            );
+            setColDefs(result.fields.map((field) => ({ field: field.name }) as ColDef));
           }
         })
         .catch((err) => {
@@ -84,8 +80,7 @@ export function SQLView({ db, setIsSolved, expectedRows }: Props) {
         minHeight={16}
         style={{
           backgroundColor: "#202020",
-          fontFamily:
-            "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
+          fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
           height: "200px",
         }}
       />
