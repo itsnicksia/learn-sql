@@ -21,7 +21,7 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   return (
     <>
       <ProblemStepStatus isSolved={isSolved} solvedText={currentStep.outcome} onNextClicked={onNextClicked} />
-      <div style={ { width: "600px", textAlign: "left", margin: "auto", backgroundColor: "#202020", padding: "10px" } }>
+      <div style={ { width: "600px", textAlign: "left", margin: "auto", padding: "10px" } }>
         <ReactMarkdown children={currentStep.blurb} />
       </div>
       <SQLView db={db} setIsSolved={setIsSolved} expectedRows={currentStep.expectedRows} />
