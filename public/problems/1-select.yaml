@@ -25,7 +25,7 @@ setupQuery: |
   ('The Doors', 'Jim Morrison', 'Psychedelic Rock'),
   ('Radiohead', 'Thom Yorke', 'Alternative Rock');
 
-title: "Act 1: Learning SQL"
+title: "Chapter 1: School of Easy SQL and Hard Rock"
 
 navigation:
   next: "coming-soon.yaml"
@@ -95,21 +95,11 @@ steps:
       ```
 
     expectedRows: |
-      The Beatles
-      Queen
-      The Rolling Stones
-      Led Zeppelin
-      Nirvana
-      Pink Floyd
-      AC/DC
-      Metallica
-      U2
-      Coldplay
-      Red Hot Chili Peppers
-      Foo Fighters
-      The Eagles
-      The Doors
-      Radiohead
+      1,The Beatles,John Lennon,Rock
+      2,Queen,Freddie Mercury,Rock
+      3,The Rolling Stones,Mick Jagger,Rock
+      9,U2,Bono,Rock
+      13,The Eagles,Don Henley,Rock
 
     outcome: Well done.
 
