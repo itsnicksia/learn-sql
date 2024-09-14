@@ -1,9 +1,9 @@
-import './App.css'
-import {ProblemView} from "./ProblemView.tsx";
+import './styles/App.css'
+import {ProblemView} from "./components/ProblemView.tsx";
 import {useEffect, useState} from "react";
 
-import {problemIndex} from "./problem-index.ts";
-import {Problem} from "./problem.ts";
+import {problemIndex} from "./config/problem-index.ts";
+import {Problem, RawProblem} from "./types/problem.ts";
 import * as yaml from "js-yaml";
 
 function App() {
@@ -14,7 +14,14 @@ function App() {
     async function loadProblem(path: string) {
       const response = await fetch(`problems/${path}`);
       const body = await response.text();
-      setProblem(yaml.load(body) as Problem);
+      const {blurb, expectedCsv, migrations, title} = yaml.load(body) as RawProblem;
+      const expectedRows = expectedCsv.trim().split('\n').map(row => row.split(','));
+      setProblem({
+        title,
+        blurb,
+        migrations,
+        expectedRows,
+      });
     }
 
     void loadProblem(problemPath)

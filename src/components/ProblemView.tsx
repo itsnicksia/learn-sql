@@ -1,7 +1,8 @@
 import {SQLView} from "./SQLView.tsx";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {PGlite} from "@electric-sql/pglite";
-import {Problem} from "./problem.ts";
+import {Problem} from "../types/problem.ts";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
   problem: Problem,
@@ -25,12 +26,14 @@ export function ProblemView({problem, setProblemPath}: Props) {
     void waitReady();
   }, [db]);
 
+  console.log(problem.blurb);
+
   return <>
     <h1>{problem.title}</h1>
-    <h2>{problem.blurb}</h2>
+    <ReactMarkdown children={problem.blurb}/>
     {
       ready
-        ? <SQLView db={db} expectedRows={problem.expected}/>
+        ? <SQLView db={db} expectedRows={problem.expectedRows}/>
         : <div>Loading...</div>
     }
   </>
