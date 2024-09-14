@@ -26,7 +26,7 @@ export function ProblemView({problem, setProblemPath}: Props) {
   useEffect(() => {
     async function setup(db: PGlite, problem: Problem) {
         return await db.transaction(async (tx) => {
-          await tx.exec(`DROP SCHEMA IF EXISTS ${PROBLEM_SCHEMA}`);
+          await tx.exec(`DROP SCHEMA IF EXISTS ${PROBLEM_SCHEMA} CASCADE`);
           await tx.exec(`CREATE SCHEMA ${PROBLEM_SCHEMA}`);
           await tx.exec(`SET search_path TO ${PROBLEM_SCHEMA}`);
           return await tx.exec(problem.setupQuery);
