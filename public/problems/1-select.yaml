@@ -35,7 +35,7 @@ steps:
       Wanna learn about COOL ROCK BANDS? 
 
       The secret code is...
-      
+
       `select * from bands`
     expectedRows: |
       1,The Beatles,John Lennon,Rock
@@ -57,11 +57,11 @@ steps:
   # Objective: Teach "SELECT" *
   - blurb: |
       The "`*`" in `select * from bands` means "everything" 
-      
+
       As in, every column of the table (i.e. `band_name`, `lead_singer`)
-      
+
       So it basically says "Get me every (`*`) column from (the table) `bands`".
-      
+
       Let's try getting just the band names from the table "`bands`".
 
     expectedRows: |
@@ -80,4 +80,3 @@ steps:
       The Eagles
       The Doors
       Radiohead
-    

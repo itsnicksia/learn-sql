@@ -2,4 +2,4 @@
 export const PROBLEM_SCHEMA = "problem";
 export const USER_DATA_SCHEMA = "user";
 
-export const DEBUG = import.meta.env.MODE === "development"
+export const DEBUG = import.meta.env.MODE === "development";
