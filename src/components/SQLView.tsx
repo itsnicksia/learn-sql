@@ -63,6 +63,9 @@ export function SQLView({db, setIsSolved, expectedRows}: Props) {
   useEffect(() => {
     queryBuffer = "";
     setQuery(null);
+    setRowData([]);
+    setColDefs([]);
+    setResult(null);
   }, [expectedRows])
 
   return (

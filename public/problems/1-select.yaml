@@ -1,6 +1,6 @@
 setupQuery: |
   -- Create the "Bands" table
-  CREATE TABLE Bands (
+  CREATE TABLE bands (
       id SERIAL PRIMARY KEY,
       band_name VARCHAR(100) NOT NULL,
       lead_singer VARCHAR(100) NOT NULL,
@@ -8,7 +8,7 @@ setupQuery: |
   );
 
   -- Insert some example data of famous bands
-  INSERT INTO Bands (band_name, lead_singer, genre) VALUES
+  INSERT INTO bands (band_name, lead_singer, genre) VALUES
   ('The Beatles', 'John Lennon', 'Rock'),
   ('Queen', 'Freddie Mercury', 'Rock'),
   ('The Rolling Stones', 'Mick Jagger', 'Rock'),
@@ -26,27 +26,58 @@ setupQuery: |
   ('Radiohead', 'Thom Yorke', 'Alternative Rock');
 
 title: "Act 1: Learning SQL"
-blurb: |
-  Wanna learn about bands? ROCK BANDS?!
-  
-  Try typing in: `SELECT * FROM Bands`
-  
-  Don't stress about the case. We're case insensitive here.
+
 navigation:
-  next: "test-problem-3.yaml"
-expectedRows: |
-  1,The Beatles,John Lennon,Rock
-  2,Queen,Freddie Mercury,Rock
-  3,The Rolling Stones,Mick Jagger,Rock
-  4,Led Zeppelin,Robert Plant,Hard Rock
-  5,Nirvana,Kurt Cobain,Grunge
-  6,Pink Floyd,Roger Waters,Progressive Rock
-  7,AC/DC,Brian Johnson,Hard Rock
-  8,Metallica,James Hetfield,Heavy Metal
-  9,U2,Bono,Rock
-  10,Coldplay,Chris Martin,Alternative Rock
-  11,Red Hot Chili Peppers,Anthony Kiedis,Funk Rock
-  12,Foo Fighters,Dave Grohl,Alternative Rock
-  13,The Eagles,Don Henley,Rock
-  14,The Doors,Jim Morrison,Psychedelic Rock
-  15,Radiohead,Thom Yorke,Alternative Rock
+  next: "coming-soon.yaml"
+steps:
+  # Objective: Teach "SELECT" *
+  - blurb: |
+      Wanna learn about COOL ROCK BANDS? 
+
+      The secret code is...
+      
+      `select * from bands`
+    expectedRows: |
+      1,The Beatles,John Lennon,Rock
+      2,Queen,Freddie Mercury,Rock
+      3,The Rolling Stones,Mick Jagger,Rock
+      4,Led Zeppelin,Robert Plant,Hard Rock
+      5,Nirvana,Kurt Cobain,Grunge
+      6,Pink Floyd,Roger Waters,Progressive Rock
+      7,AC/DC,Brian Johnson,Hard Rock
+      8,Metallica,James Hetfield,Heavy Metal
+      9,U2,Bono,Rock
+      10,Coldplay,Chris Martin,Alternative Rock
+      11,Red Hot Chili Peppers,Anthony Kiedis,Funk Rock
+      12,Foo Fighters,Dave Grohl,Alternative Rock
+      13,The Eagles,Don Henley,Rock
+      14,The Doors,Jim Morrison,Psychedelic Rock
+      15,Radiohead,Thom Yorke,Alternative Rock
+    outcome: Well done! You can read _and_ write!
+  # Objective: Teach "SELECT" *
+  - blurb: |
+      The "`*`" in `select * from bands` means "everything" 
+      
+      As in, every column of the table (i.e. `band_name`, `lead_singer`)
+      
+      So it basically says "Get me every (`*`) column from (the table) `bands`".
+      
+      Let's try getting just the band names from the table "`bands`".
+
+    expectedRows: |
+      The Beatles
+      Queen
+      The Rolling Stones
+      Led Zeppelin
+      Nirvana
+      Pink Floyd
+      AC/DC
+      Metallica
+      U2
+      Coldplay
+      Red Hot Chili Peppers
+      Foo Fighters
+      The Eagles
+      The Doors
+      Radiohead
+    
