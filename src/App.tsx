@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 
 import {problemIndex} from "./problem-index.ts";
 import {Problem} from "./problem.ts";
+import * as yaml from "js-yaml";
 
 function App() {
   const [problemPath, setProblemPath] = useState(problemIndex.first);
@@ -12,7 +13,8 @@ function App() {
   useEffect(() => {
     async function loadProblem(path: string) {
       const response = await fetch(`problems/${path}`);
-      setProblem(await response.json() as Problem);
+      const body = await response.text();
+      setProblem(yaml.load(body) as Problem);
     }
 
     void loadProblem(problemPath)

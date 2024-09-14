@@ -1,3 +1,3 @@
 export const problemIndex = {
-  "first": "test-problem.json"
+  "first": "test-problem.yaml"
 }

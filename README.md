@@ -1,4 +1,6 @@
 ## Ideas
  - Challenge Mode: Simulate real tasks.
  - Kimball Mode: Kimball Dimensional Modelling.
- - w
+ - Floating Top Nav Anchor
+ - Table View
+ - YAML w/ Markdown
