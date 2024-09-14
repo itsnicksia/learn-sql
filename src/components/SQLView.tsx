@@ -81,7 +81,8 @@ export function SQLView({ db, setIsSolved, expectedRows }: Props) {
         style={{
           backgroundColor: "#202020",
           fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-          height: "200px",
+          fontSize: "20px",
+          fontWeight: "bold",
         }}
       />
       <button onClick={() => setQuery(queryBuffer)}>Execute!</button>
