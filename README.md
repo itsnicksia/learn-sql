@@ -3,4 +3,3 @@
  - Kimball Mode: Kimball Dimensional Modelling.
  - Floating Top Nav Anchor
  - Table View
- - YAML w/ Markdown

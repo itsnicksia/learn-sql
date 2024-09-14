@@ -1,5 +1,5 @@
 import {PGlite, Results} from "@electric-sql/pglite";
-import {useEffect, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import {AgGridReact} from 'ag-grid-react'; // React Data Grid Component
 import {ColDef} from "ag-grid-community";
@@ -8,18 +8,18 @@ import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied
 
 interface Props {
   db: PGlite,
+  setIsSolved: Dispatch<SetStateAction<boolean>>
   expectedRows: string[][],
 }
 
-export function SQLView({db, expectedRows}: Props) {
+export function SQLView({db, setIsSolved, expectedRows}: Props) {
   let queryBuffer = "";
   const [query, setQuery] = useState<string>("");
 
   const [rowData, setRowData] = useState<unknown[]>([]);
   const [colDefs, setColDefs] = useState<ColDef<unknown>[]>([]);
 
-  const [result, setResult] = useState<Results<Record<string, string>>>();
-  const [isSolved, setIsSolved] = useState(false);
+  const [result, setResult] = useState<Results<Record<string, string>> | null>();
 
   // Execute the query
   useEffect(() => {
@@ -28,7 +28,6 @@ export function SQLView({db, expectedRows}: Props) {
       setRowData(result.rows);
       setResult(result);
       setColDefs(result.fields.map(field => ({"field": field.name} as ColDef)));
-      console.log(result);
     }
 
     executeQuery().catch(err => {
@@ -43,11 +42,15 @@ export function SQLView({db, expectedRows}: Props) {
   useEffect(() => {
     if (result) {
       const actualRows = resultToRows(result);
-
       setIsSolved(isResultCorrect(actualRows, expectedRows));
     }
   }, [result, expectedRows])
 
+  // Reset on new problem.
+  useEffect(() => {
+    queryBuffer = "";
+    setQuery("");
+  }, [expectedRows])
 
   return (
     <div style={{width: "100%"}}>
@@ -70,7 +73,7 @@ export function SQLView({db, expectedRows}: Props) {
         }
       }}>Execute!
       </button>
-      <h3>{isSolved ? "Solved!" : "Not Solved"}</h3>
+
       <div
         className="ag-theme-quartz-auto-dark" // applying the Data Grid theme
         style={{height: 500}} // the Data Grid will fill the size of the parent container

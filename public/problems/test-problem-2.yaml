@@ -1,0 +1,8 @@
+migrations: []
+title: "Act 1: Learning SQL"
+blurb: |
+  Run a query that returns a single row with a single column that has the value __2__.
+navigation:
+  next: "test-problem.yaml"
+expectedCsv: |
+  2

@@ -14,12 +14,13 @@ function App() {
     async function loadProblem(path: string) {
       const response = await fetch(`problems/${path}`);
       const body = await response.text();
-      const {blurb, expectedCsv, migrations, title} = yaml.load(body) as RawProblem;
+      const {title, blurb, migrations, navigation, expectedCsv} = yaml.load(body) as RawProblem;
       const expectedRows = expectedCsv.trim().split('\n').map(row => row.split(','));
       setProblem({
         title,
         blurb,
         migrations,
+        navigation,
         expectedRows,
       });
     }
