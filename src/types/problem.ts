@@ -1,17 +1,9 @@
-export interface RawProblem {
-  migrations: string[]
-  title: string
-  blurb: string
-  navigation: Navigation
-  expectedCsv: string
-}
-
 export interface Problem {
-  migrations: string[],
+  setupQuery: string,
   title: string
   blurb: string
   navigation: Navigation
-  expectedRows: string[][]
+  expectedRows: string
 }
 
 interface Navigation {

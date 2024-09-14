@@ -1,3 +1,3 @@
 export const problemIndex = {
-  "first": "test-problem.yaml"
+  "first": "1-select.yaml"
 }

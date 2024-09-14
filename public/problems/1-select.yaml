@@ -1,0 +1,52 @@
+setupQuery: |
+  -- Create the "Bands" table
+  CREATE TABLE Bands (
+      id SERIAL PRIMARY KEY,
+      band_name VARCHAR(100) NOT NULL,
+      lead_singer VARCHAR(100) NOT NULL,
+      genre VARCHAR(50) NOT NULL
+  );
+
+  -- Insert some example data of famous bands
+  INSERT INTO Bands (band_name, lead_singer, genre) VALUES
+  ('The Beatles', 'John Lennon', 'Rock'),
+  ('Queen', 'Freddie Mercury', 'Rock'),
+  ('The Rolling Stones', 'Mick Jagger', 'Rock'),
+  ('Led Zeppelin', 'Robert Plant', 'Hard Rock'),
+  ('Nirvana', 'Kurt Cobain', 'Grunge'),
+  ('Pink Floyd', 'Roger Waters', 'Progressive Rock'),
+  ('AC/DC', 'Brian Johnson', 'Hard Rock'),
+  ('Metallica', 'James Hetfield', 'Heavy Metal'),
+  ('U2', 'Bono', 'Rock'),
+  ('Coldplay', 'Chris Martin', 'Alternative Rock'),
+  ('Red Hot Chili Peppers', 'Anthony Kiedis', 'Funk Rock'),
+  ('Foo Fighters', 'Dave Grohl', 'Alternative Rock'),
+  ('The Eagles', 'Don Henley', 'Rock'),
+  ('The Doors', 'Jim Morrison', 'Psychedelic Rock'),
+  ('Radiohead', 'Thom Yorke', 'Alternative Rock');
+
+title: "Act 1: Learning SQL"
+blurb: |
+  Wanna learn about bands? ROCK BANDS?!
+  
+  Try typing in: `SELECT * FROM Bands`
+  
+  Don't stress about the case. We're case insensitive here.
+navigation:
+  next: "test-problem-3.yaml"
+expectedRows: |
+  1,The Beatles,John Lennon,Rock
+  2,Queen,Freddie Mercury,Rock
+  3,The Rolling Stones,Mick Jagger,Rock
+  4,Led Zeppelin,Robert Plant,Hard Rock
+  5,Nirvana,Kurt Cobain,Grunge
+  6,Pink Floyd,Roger Waters,Progressive Rock
+  7,AC/DC,Brian Johnson,Hard Rock
+  8,Metallica,James Hetfield,Heavy Metal
+  9,U2,Bono,Rock
+  10,Coldplay,Chris Martin,Alternative Rock
+  11,Red Hot Chili Peppers,Anthony Kiedis,Funk Rock
+  12,Foo Fighters,Dave Grohl,Alternative Rock
+  13,The Eagles,Don Henley,Rock
+  14,The Doors,Jim Morrison,Psychedelic Rock
+  15,Radiohead,Thom Yorke,Alternative Rock

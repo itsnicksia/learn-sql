@@ -4,17 +4,19 @@ import CodeEditor from '@uiw/react-textarea-code-editor';
 import {AgGridReact} from 'ag-grid-react'; // React Data Grid Component
 import {ColDef} from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
-import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
+import "ag-grid-community/styles/ag-theme-quartz.css";
+import {DEBUG, PROBLEM_SCHEMA} from "../config.ts"; // Optional Theme applied to the Data Grid
 
 interface Props {
-  db: PGlite,
+  db: PGlite
   setIsSolved: Dispatch<SetStateAction<boolean>>
-  expectedRows: string[][],
+  expectedRows: string
 }
 
+let queryBuffer = "";
+
 export function SQLView({db, setIsSolved, expectedRows}: Props) {
-  let queryBuffer = "";
-  const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState<string | null>(null);
 
   const [rowData, setRowData] = useState<unknown[]>([]);
   const [colDefs, setColDefs] = useState<ColDef<unknown>[]>([]);
@@ -23,39 +25,50 @@ export function SQLView({db, setIsSolved, expectedRows}: Props) {
 
   // Execute the query
   useEffect(() => {
-    async function executeQuery() {
-      const result = await db.query<Record<string, string>>(query);
-      setRowData(result.rows);
-      setResult(result);
-      setColDefs(result.fields.map(field => ({"field": field.name} as ColDef)));
+    async function executeQuery(query: string) {
+      return await db.transaction(async (tx) => {
+        await tx.exec(`SET search_path TO ${PROBLEM_SCHEMA}`);
+        return await tx.query<Record<string, string>>(query);
+      });
     }
 
-    executeQuery().catch(err => {
-      if (err instanceof Error) {
-        // TODO: Display errors properly
-        console.log(err);
-      }
-    });
+    query && executeQuery(query)
+        .then((result) => {
+          if (result) {
+            setRowData(result.rows);
+            setResult(result);
+            setColDefs(result.fields.map(field => ({"field": field.name} as ColDef)));
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
   }, [db, query]);
 
   // Check the result
   useEffect(() => {
     if (result) {
-      const actualRows = resultToRows(result);
-      setIsSolved(isResultCorrect(actualRows, expectedRows));
+      const actualRows = toCSV(resultToRows(result));
+      setIsSolved(actualRows.trim() === expectedRows.trim());
+
+      // for printing answers
+      if (DEBUG) {
+        console.log(actualRows);
+        console.log(expectedRows);
+      }
     }
   }, [result, expectedRows])
 
   // Reset on new problem.
   useEffect(() => {
     queryBuffer = "";
-    setQuery("");
+    setQuery(null);
   }, [expectedRows])
 
   return (
     <div style={{width: "100%"}}>
       <CodeEditor
-        value={query}
+        value={query ?? ""}
         language="sql"
         placeholder="It's SQL Time!"
         onChange={(evn) => queryBuffer = evn.target.value}
@@ -67,11 +80,7 @@ export function SQLView({db, setIsSolved, expectedRows}: Props) {
           height: "200px",
         }}
       />
-      <button onClick={() => {
-        if (queryBuffer != "") {
-          setQuery(queryBuffer)
-        }
-      }}>Execute!
+      <button onClick={() => setQuery(queryBuffer)}>Execute!
       </button>
 
       <div
@@ -94,25 +103,6 @@ function resultToRows(result: Results<Record<string, string>>): string[][] {
   );
 }
 
-function isResultCorrect(actualRows: string[][], expectedRows: string[][]): boolean {
-  if (actualRows.length !== expectedRows.length) {
-    return false;
-  }
-
-  for (let rowIndex = 0; rowIndex < actualRows.length; rowIndex++) {
-    const actualRow = actualRows[rowIndex];
-    const expectedRow = expectedRows[rowIndex];
-
-    if (actualRow.length !== expectedRow.length) {
-      return false;
-    }
-
-    for (let columnIndex = 0; columnIndex < actualRow.length; columnIndex++) {
-      if (actualRow[columnIndex].toString() !== expectedRow[columnIndex]) {
-        return false;
-      }
-    }
-  }
-
-  return true;
+function toCSV(rows: string[][]) {
+  return rows.map(row => row.join(',')).join('\n')
 }

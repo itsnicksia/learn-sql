@@ -1,0 +1,8 @@
+setupQuery: []
+title: "Act 1: Learning SQL"
+blurb: |
+  More coming soon!
+navigation:
+  next: "1-select.yaml"
+expectedRows: |
+  1

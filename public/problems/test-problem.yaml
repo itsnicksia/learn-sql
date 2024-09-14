@@ -1,8 +1,0 @@
-migrations: []
-title: "Act 1: Learning SQL"
-blurb: |
-  Run a query that returns a single row with a single column that has the value __1__.
-navigation:
-  next: "test-problem-2.yaml"
-expectedCsv: |
-  1
