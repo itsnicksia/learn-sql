@@ -14,8 +14,11 @@ const MessageBubble = ({ message, type }: Props) => {
         <div className={`message-bubble ${type}`}>
           <ReactMarkdown children={message} />
         </div>
-        <span className="name">{name}</span>
-        <span className="timestamp">{new Date().toISOString()}</span>
+        <div>
+          <div className="name">{name}</div>
+          <div className="timestamp">{new Date().toISOString()}</div>
+        </div>
+
       </div>
     </div>
   );

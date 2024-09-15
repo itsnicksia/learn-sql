@@ -1,0 +1,12 @@
+.sql-view {
+    display: flex;
+    width: 100%;
+}
+
+.fixed-width {
+    width: 50px;
+}
+
+.flex-fill {
+    flex-grow: 1;
+}

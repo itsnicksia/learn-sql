@@ -2,7 +2,6 @@ import { SQLView } from "./SQLView.tsx";
 import { useEffect, useRef, useState } from "react";
 import { PGlite } from "@electric-sql/pglite";
 import { ProblemStep } from "../types/problem.ts";
-import { ProblemStepStatus } from "./molecule/ProblemStepStatus.tsx";
 import MessageBubble from "./molecule/MessageBubble.tsx";
 import '../styles/ProblemStepView.css';
 
@@ -42,6 +41,12 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
     scrollToBottom();
   }, [messageLog]);
 
+  useEffect(() => {
+    if (isSolved) {
+      onNextClicked();
+    }
+  }, [isSolved])
+
   // Function to scroll to the bottom
   const scrollToBottom = () => {
     if (messageEndRef.current) {
@@ -51,7 +56,6 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
 
   return (
     <>
-      <ProblemStepStatus isSolved={isSolved} solvedText={currentStep.success} onNextClicked={onNextClicked} />
       <div className={"problem-step-view"}>
         {messageLog.map((message, index) => (
           <MessageBubble key={index} message={message} type={"narrator"} />

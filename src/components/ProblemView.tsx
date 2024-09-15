@@ -47,9 +47,9 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
 
   return (
     <>
-      {DEBUG && <DebugToolbar onNextClicked={onNextClicked} />}
-      <h2>{problem.title}</h2>
+      <h3>{problem.title}</h3>
       {currentStep ? <ProblemStepView db={db} currentStep={currentStep} onNextClicked={onNextClicked} /> : <Repl pg={db} />}
+      {DEBUG && <DebugToolbar onNextClicked={onNextClicked} />}
     </>
   );
 }

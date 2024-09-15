@@ -1,8 +1,7 @@
 .problem-step-view {
-    width: 70vw;
-    height: 35vh;
+    width: 95vw;
+    height: 81vh;
     text-align: left;
-    margin: auto;
     padding: 10px;
     background-color: #e2e2e2;
     overflow-y: auto;
@@ -10,7 +9,7 @@
 
 /* Hide the default scrollbar track */
 .problem-step-view::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
+    width: 1vw; /* Width of the scrollbar */
 }
 
 .problem-step-view::-webkit-scrollbar-track {

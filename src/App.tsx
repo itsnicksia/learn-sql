@@ -28,7 +28,7 @@ function App() {
   }, [problemPath]);
   return (
     <>
-      <div style={{ height: "50%" }}>{db ? problem && <ProblemView setProblemPath={setProblemPath} problem={problem} db={db} /> : "Loading..."}</div>
+      {db ? problem && <ProblemView setProblemPath={setProblemPath} problem={problem} db={db} /> : "Loading..."}
     </>
   );
 }

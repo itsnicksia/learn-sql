@@ -1,11 +1,10 @@
 import { PGlite, Results } from "@electric-sql/pglite";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import CodeEditor from "@uiw/react-textarea-code-editor";
-import { AgGridReact } from "ag-grid-react"; // React Data Grid Component
-import { ColDef } from "ag-grid-community";
 import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { DEBUG, PROBLEM_SCHEMA } from "../config.ts"; // Optional Theme applied to the Data Grid
+import "./../styles/SQLView.css";
 
 interface Props {
   db: PGlite;
@@ -17,10 +16,6 @@ let queryBuffer = "";
 
 export function SQLView({ db, setIsSolved, expectedRows }: Props) {
   const [query, setQuery] = useState<string | null>(null);
-
-  const [rowData, setRowData] = useState<unknown[]>([]);
-  const [colDefs, setColDefs] = useState<ColDef<unknown>[]>([]);
-
   const [result, setResult] = useState<Results<Record<string, string>> | null>();
 
   // Execute the query
@@ -36,9 +31,7 @@ export function SQLView({ db, setIsSolved, expectedRows }: Props) {
       executeQuery(query)
         .then((result) => {
           if (result) {
-            setRowData(result.rows);
             setResult(result);
-            setColDefs(result.fields.map((field) => ({ field: field.name }) as ColDef));
           }
         })
         .catch((err) => {
@@ -64,13 +57,11 @@ export function SQLView({ db, setIsSolved, expectedRows }: Props) {
   useEffect(() => {
     queryBuffer = "";
     setQuery(null);
-    setRowData([]);
-    setColDefs([]);
     setResult(null);
   }, [expectedRows]);
 
   return (
-    <div style={{ width: "70vw", margin: "auto" }}>
+    <div className={"sql-view flex-fill"}>
       <CodeEditor
         value={query ?? ""}
         language="sql"
@@ -78,21 +69,16 @@ export function SQLView({ db, setIsSolved, expectedRows }: Props) {
         onChange={(evn) => (queryBuffer = evn.target.value)}
         padding={15}
         minHeight={16}
+        className={"code-editor"}
         style={{
-          backgroundColor: "#202020",
-          fontFamily: "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",
-          fontSize: "20px",
-          fontWeight: "bold",
+          backgroundColor: '#202020',
+          fontFamily: 'ui-monospace, SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace',
+          fontSize: '1rem',
+          fontWeight: 'bold',
+          flexGrow: 1
         }}
       />
-      <button onClick={() => setQuery(queryBuffer)}>Execute!</button>
-
-      <div
-        className="ag-theme-quartz-auto-dark" // applying the Data Grid theme
-        style={{ height: 500 }} // the Data Grid will fill the size of the parent container
-      >
-        <AgGridReact rowData={rowData} columnDefs={colDefs} />
-      </div>
+      <button className={"fixed-width"} onClick={() => setQuery(queryBuffer)}>Go</button>
     </div>
   );
 }

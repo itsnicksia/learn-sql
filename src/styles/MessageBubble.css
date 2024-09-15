@@ -49,8 +49,8 @@
 .message-content {
     display: flex;
     flex-direction: column;
-    max-width: 60%;
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-width: 80%;
+    min-width: 60%;
 }
 
 .name {
