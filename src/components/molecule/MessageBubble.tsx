@@ -3,15 +3,15 @@ import ReactMarkdown from "react-markdown"; // Custom CSS for styling the bubble
 
 interface Props {
   message: string
-  type: "user" | "narrator"
+  participantType: "user" | "narrator"
 }
 
-const MessageBubble = ({ message, type }: Props) => {
-  const name = type === "narrator" ? "Ally McBeal" : "You";
+const MessageBubble = ({ message, participantType }: Props) => {
+  const name = participantType === "narrator" ? "Ally McBeal" : "You";
   return (
-    <div className={`message-bubble-container ${type}`}>
+    <div className={`message-bubble-container ${participantType}`}>
       <div className="message-content">
-        <div className={`message-bubble ${type}`}>
+        <div className={`message-bubble ${participantType}`}>
           <ReactMarkdown children={message} />
         </div>
         <div>

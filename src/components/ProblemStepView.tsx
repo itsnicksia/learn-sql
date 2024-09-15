@@ -4,6 +4,7 @@ import { PGlite } from "@electric-sql/pglite";
 import { ProblemStep } from "../types/problem.ts";
 import MessageBubble from "./molecule/MessageBubble.tsx";
 import '../styles/ProblemStepView.css';
+import { ChatMessage } from "../types/chat-message.ts";
 
 interface Props {
   db: PGlite;
@@ -13,28 +14,31 @@ interface Props {
 
 export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   const [isSolved, setIsSolved] = useState(false);
-  const [messageIndex, setMessageIndex] = useState(0);
-  const [messageLog, setMessageLog] = useState<string[]>([]);
+  const [messageLog, setMessageLog] = useState<ChatMessage[]>([]);
 
   const messageEndRef = useRef<HTMLDivElement>(null);
 
+  const [messageQueue, setMessageQueue] = useState<string[]>([]);
+
   useEffect(() => {
-    console.log(`${messageIndex + 1}/${currentStep.messages.length}`);
-    setMessageLog(messageLog.concat(currentStep.messages[messageIndex]));
-    if (messageIndex < currentStep.messages.length - 1) {
-      let timeout = setTimeout(() => {
-        setMessageIndex(messageIndex + 1);
+      let messagePoller = setInterval(() => {
+        const message = messageQueue.shift();
+        if (message) {
+          setMessageLog(prevLog => prevLog.concat({
+            message,
+            participantType: "narrator"
+          }));
+        }
       }, 1750);
 
       return () => {
-        clearTimeout(timeout);
+        clearInterval(messagePoller);
       };
-    }
-  }, [messageIndex]);
+  }, [messageQueue]);
 
   useEffect(() => {
     setIsSolved(false);
-    setMessageIndex(0);
+    setMessageQueue(messageQueue.concat(currentStep.messages));
   }, [currentStep]);
 
   useEffect(() => {
@@ -43,7 +47,10 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
 
   useEffect(() => {
     if (isSolved) {
-      setMessageLog(messageLog.concat(currentStep.success));
+      setMessageLog(prevLog => prevLog.concat({
+        message: currentStep.success,
+        participantType: "user"
+      }));
       onNextClicked();
     }
   }, [isSolved])
@@ -58,8 +65,8 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   return (
     <>
       <div className={"problem-step-view"}>
-        {messageLog.map((message, index) => (
-          <MessageBubble key={index} message={message} type={"narrator"} />
+        {messageLog.map((chatMessage, index) => (
+          <MessageBubble key={index} message={chatMessage.message} participantType={chatMessage.participantType} />
         ))}
         <div ref={messageEndRef}></div>
       </div>

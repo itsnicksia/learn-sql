@@ -1,4 +1,4 @@
 export interface ChatMessage {
-  type: "user" | "narrator"
+  participantType: "user" | "narrator"
   message: string
 }

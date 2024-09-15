@@ -57,10 +57,11 @@ steps:
       13,The Eagles,Don Henley,Rock
       14,The Doors,Jim Morrison,Psychedelic Rock
       15,Radiohead,Thom Yorke,Alternative Rock
-    success: Well done! You can read _and_ write!
+    success: Here you go!
   # Objective: Teach "SELECT" - column
   - messages:
-      - The "`*`" in `select * from bands` means "everything"
+      - Thanks!
+      - Oh - by the way, the "`*`" in `select * from bands` means "everything"
       - As in, every column of the table (i.e. `band_name`, `lead_singer`)
       - So it basically says "Get me every (`*`) column from (the table) `bands`".
       - Let's try getting just the band names from the table "`bands`".
