@@ -25,15 +25,22 @@ setupQuery: |
   ('The Doors', 'Jim Morrison', 'Psychedelic Rock'),
   ('Radiohead', 'Thom Yorke', 'Alternative Rock');
 
-title: "Chapter 1: School of Easy SQL and Hard Rock"
+title: "Chapter 1: Welcome to SQL!"
 
 navigation:
   next: "coming-soon.yaml"
 steps:
   - messages:
-      - "Wanna learn about COOL ROCK BANDS?"
-      - "The secret code is..."
-      - "`select * from bands`"
+      - "Hello! Mind helping me with something?"
+      - "Seems like you're the only one with database access..."
+      - |
+        Can you type in 
+        
+        `select * from bands` 
+        
+        and click `Go`? 
+        
+        plz plz plz
     expectedRows: |
       1,The Beatles,John Lennon,Rock
       2,Queen,Freddie Mercury,Rock

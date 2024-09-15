@@ -43,6 +43,7 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
 
   useEffect(() => {
     if (isSolved) {
+      setMessageLog(messageLog.concat(currentStep.success));
       onNextClicked();
     }
   }, [isSolved])

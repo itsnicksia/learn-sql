@@ -1,16 +1,17 @@
 :root {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Lora', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #D4C4EC;
+  background-color: #BCA4E3;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  color: #2C2C2C;
 }
 
 a {
@@ -36,8 +37,8 @@ h1 {
   line-height: 1.1;
 }
 
-h3 {
-  color: #343434;
+h4 {
+  margin: 3px;
 }
 
 button {
