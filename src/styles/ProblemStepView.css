@@ -1,0 +1,36 @@
+.problem-step-view {
+    width: 70vw;
+    height: 35vh;
+    text-align: left;
+    margin: auto;
+    padding: 10px;
+    background-color: #e2e2e2;
+    overflow-y: auto;
+}
+
+/* Hide the default scrollbar track */
+.problem-step-view::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.problem-step-view::-webkit-scrollbar-track {
+    background: transparent; /* Make the track invisible */
+}
+
+/* Style the scrollbar thumb (the part you can drag) */
+.problem-step-view::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3); /* Add some transparency to make it subtle */
+    border-radius: 10px; /* Make it rounded */
+    border: 2px solid #e5ddd5; /* Adds a gap between the thumb and track for a cleaner look */
+}
+
+/* When hovering over the scrollbar */
+.problem-step-view::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Darken the thumb on hover for better visibility */
+}
+
+/* For Firefox */
+.problem-step-view {
+    scrollbar-width: thin; /* Make the scrollbar narrower */
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* Thumb and track color for Firefox */
+}

@@ -70,7 +70,7 @@ export function SQLView({ db, setIsSolved, expectedRows }: Props) {
   }, [expectedRows]);
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "70vw", margin: "auto" }}>
       <CodeEditor
         value={query ?? ""}
         language="sql"

@@ -6,3 +6,4 @@
 - Table View
 - persistence...
 - missing "success" message.
+- inject grid into convo
