@@ -6,9 +6,9 @@ export interface Problem {
 }
 
 export interface ProblemStep {
-  blurb: string;
+  messages: string[];
   expectedRows: string;
-  outcome: string;
+  success: string;
 }
 
 interface Navigation {

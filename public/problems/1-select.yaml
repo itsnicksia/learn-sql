@@ -30,13 +30,10 @@ title: "Chapter 1: School of Easy SQL and Hard Rock"
 navigation:
   next: "coming-soon.yaml"
 steps:
-  # Objective: Teach "SELECT" *
-  - blurb: |
-      Wanna learn about COOL ROCK BANDS? 
-
-      The secret code is...
-
-      `select * from bands`
+  - messages:
+      - "Wanna learn about COOL ROCK BANDS?"
+      - "The secret code is..."
+      - "`select * from bands`"
     expectedRows: |
       1,The Beatles,John Lennon,Rock
       2,Queen,Freddie Mercury,Rock
@@ -53,17 +50,13 @@ steps:
       13,The Eagles,Don Henley,Rock
       14,The Doors,Jim Morrison,Psychedelic Rock
       15,Radiohead,Thom Yorke,Alternative Rock
-    outcome: Well done! You can read _and_ write!
+    success: Well done! You can read _and_ write!
   # Objective: Teach "SELECT" - column
-  - blurb: |
-      The "`*`" in `select * from bands` means "everything" 
-
-      As in, every column of the table (i.e. `band_name`, `lead_singer`)
-
-      So it basically says "Get me every (`*`) column from (the table) `bands`".
-
-      Let's try getting just the band names from the table "`bands`".
-
+  - messages:
+      - The "`*`" in `select * from bands` means "everything"
+      - As in, every column of the table (i.e. `band_name`, `lead_singer`)
+      - So it basically says "Get me every (`*`) column from (the table) `bands`".
+      - Let's try getting just the band names from the table "`bands`".
     expectedRows: |
       The Beatles
       Queen
@@ -81,18 +74,19 @@ steps:
       The Doors
       Radiohead
 
-    outcome: Well done.
+    success: Well done.
   # Objective: Teach "WHERE"
-  - blurb: |
-      What if we only like "normal" rock?
+  - messages:
+       - What if we only like "normal" rock?
 
-      Try:
+       - |
+        Try:
 
-      ```
-        select * 
-        from bands
-        where genre = 'Rock'
-      ```
+        ```
+          select * 
+          from bands
+          where genre = 'Rock'
+        ```
 
     expectedRows: |
       1,The Beatles,John Lennon,Rock
@@ -101,4 +95,4 @@ steps:
       9,U2,Bono,Rock
       13,The Eagles,Don Henley,Rock
 
-    outcome: Well done.
+    success: Well done.

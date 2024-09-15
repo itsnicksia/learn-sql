@@ -33,7 +33,7 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
 
   function onNextClicked() {
     if (!problem.steps) {
-      // We've likely hit a terminal point - do nothing.
+      // We ran out of content...
     } else if (stepIndex < problem.steps.length - 1) {
       setStepIndex(stepIndex + 1);
     } else {
@@ -43,6 +43,7 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
   }
 
   const currentStep = problem.steps ? problem.steps[stepIndex] : null;
+
 
   return (
     <>
