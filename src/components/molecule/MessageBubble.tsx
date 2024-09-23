@@ -1,13 +1,14 @@
 import '../../styles/MessageBubble.css';
-import ReactMarkdown from "react-markdown"; // Custom CSS for styling the bubbles
+import ReactMarkdown from "react-markdown";
+import {ChatMessage} from "../../types/chat-message.ts"; // Custom CSS for styling the bubbles
 
 interface Props {
-  message: string
-  participantType: "user" | "narrator"
+  chatMessage: ChatMessage
 }
 
-const MessageBubble = ({ message, participantType }: Props) => {
-  const name = participantType === "narrator" ? "Ally McBeal" : "You";
+const MessageBubble = ({ chatMessage }: Props) => {
+  const { message, participantType } = chatMessage;
+  const name = participantType === "mentor" ? "Ally McBeal" : "You";
   return (
     <div className={`message-bubble-container ${participantType}`}>
       <div className="message-content">

@@ -6,16 +6,11 @@ import { problemIndex } from "./config/problem-index.ts";
 import { Problem } from "./types/problem.ts";
 import * as yaml from "js-yaml";
 import { PGlite } from "@electric-sql/pglite";
-import loadDb from "./hooks/load-database.ts";
 
 function App() {
-  const [db, setDb] = useState<PGlite | null>(null);
+  const [db] = useState<PGlite>(new PGlite());
   const [problemPath, setProblemPath] = useState(problemIndex.first);
   const [problem, setProblem] = useState<Problem | null>(null);
-
-  useEffect(() => {
-    !db && void loadDb(setDb);
-  }, [db]);
 
   useEffect(() => {
     async function loadProblem(path: string) {
@@ -28,7 +23,7 @@ function App() {
   }, [problemPath]);
   return (
     <>
-      {db ? problem && <ProblemView setProblemPath={setProblemPath} problem={problem} db={db} /> : "Loading..."}
+      { problem && <ProblemView setProblemPath={setProblemPath} problem={problem} db={db} /> }
     </>
   );
 }

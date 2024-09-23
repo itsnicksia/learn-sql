@@ -1,4 +1,4 @@
 export interface ChatMessage {
-  participantType: "user" | "narrator"
+  participantType: "user" | "mentor" | "submittedResult" | "tip" | "summary"
   message: string
 }

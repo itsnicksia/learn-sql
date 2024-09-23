@@ -1,4 +1,4 @@
-import { SQLView } from "./SQLView.tsx";
+import { SQLConsole } from "./SQLConsole.tsx";
 import { useEffect, useRef, useState } from "react";
 import { PGlite } from "@electric-sql/pglite";
 import { ProblemStep } from "../types/problem.ts";
@@ -13,15 +13,19 @@ interface Props {
 }
 
 export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
-  const [isSolved, setIsSolved] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isSQLConsoleOpen, setIsSQLConsoleOpen] = useState(false);
   const [messageLog, setMessageLog] = useState<ChatMessage[]>([]);
+  const [messageQueue, setMessageQueue] = useState<string[]>([]);
 
   const messageEndRef = useRef<HTMLDivElement>(null);
 
-  const [messageQueue, setMessageQueue] = useState<string[]>([]);
+  useEffect(() => {
+    setMessageLog([]);
+  }, []);
 
   useEffect(() => {
-      let messagePoller = setInterval(() => {
+      const messagePoller = setInterval(() => {
         const message = messageQueue.shift();
         if (message) {
           setMessageLog(prevLog => prevLog.concat({
@@ -37,7 +41,7 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   }, [messageQueue]);
 
   useEffect(() => {
-    setIsSolved(false);
+    setIsCompleted(false);
     setMessageQueue(messageQueue.concat(currentStep.messages));
   }, [currentStep]);
 
@@ -46,14 +50,15 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   }, [messageLog]);
 
   useEffect(() => {
-    if (isSolved) {
+    setIsSQLConsoleOpen(false);
+    if (isCompleted) {
       setMessageLog(prevLog => prevLog.concat({
         message: currentStep.success,
         participantType: "user"
       }));
       onNextClicked();
     }
-  }, [isSolved])
+  }, [isCompleted])
 
   // Function to scroll to the bottom
   const scrollToBottom = () => {
@@ -66,11 +71,13 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
     <>
       <div className={"problem-step-view"}>
         {messageLog.map((chatMessage, index) => (
-          <MessageBubble key={index} message={chatMessage.message} participantType={chatMessage.participantType} />
+          <MessageBubble key={index} chatMessage={chatMessage} />
         ))}
-        <div ref={messageEndRef}></div>
+        <div ref={messageEndRef}/>
       </div>
-      <SQLView db={db} setIsSolved={setIsSolved} expectedRows={currentStep.expectedRows} />
+      {/*Only when it's time to do something...*/}
+      <button onClick={() => setIsSQLConsoleOpen(true)}>[Connect to Database] One moment...</button>
+      { isSQLConsoleOpen && <SQLConsole db={db} setCompleted={setIsCompleted} expectedRows={currentStep.expectedRows} /> }
     </>
   );
 }
