@@ -40,8 +40,6 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
     setMessageQueue(messageQueue.concat(currentStep.messages.map(message => ({ participantType: "mentor", message }))));
   }, [currentStep]);
 
-
-
   useEffect(() => {
     setIsSQLConsoleOpen(false);
     if (isSolutionSubmitted) {
@@ -56,12 +54,9 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
     }
   }, [isSolutionSubmitted])
 
-
-
   return (
     <>
       <MessageLogView messageLog={messageLog} messageQueue={messageQueue}/>
-      {/*Only when it's time to do something...*/}
       { messageQueue.length == 0 && <button onClick={() => setIsSQLConsoleOpen(true)}>[Connect to Database] One moment...</button> }
       { isSQLConsoleOpen && <SQLConsole db={db} setIsSolutionSubmitted={setIsSolutionSubmitted} expectedRows={currentStep.expectedRows} /> }
     </>
