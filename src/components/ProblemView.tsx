@@ -43,8 +43,7 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
   }
 
   const currentStep = problem.steps ? problem.steps[stepIndex] : null;
-
-
+  
   return (
     <>
       <h4>{problem.title}</h4>

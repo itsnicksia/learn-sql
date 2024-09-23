@@ -1,11 +1,10 @@
 import { SQLConsole } from "./SQLConsole.tsx";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { PGlite } from "@electric-sql/pglite";
 import { ProblemStep } from "../types/problem.ts";
-import MessageBubble from "./molecule/MessageBubble.tsx";
 import '../styles/ProblemStepView.css';
 import { ChatMessage } from "../types/chat-message.ts";
-import TypingAnimation from "./atom/IsTypingAnimation.tsx";
+import {MessageLogView} from "./MessageLogView.tsx";
 
 interface Props {
   db: PGlite;
@@ -17,9 +16,7 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   const [isSolutionSubmitted, setIsSolutionSubmitted] = useState(false);
   const [isSQLConsoleOpen, setIsSQLConsoleOpen] = useState(false);
   const [messageLog, setMessageLog] = useState<ChatMessage[]>([]);
-  const [messageQueue, setMessageQueue] = useState<string[]>([]);
-
-  const messageEndRef = useRef<HTMLDivElement>(null);
+  const [messageQueue, setMessageQueue] = useState<ChatMessage[]>([]);
 
   useEffect(() => {
     setMessageLog([]);
@@ -29,10 +26,7 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
       const messagePoller = setInterval(() => {
         const message = messageQueue.shift();
         if (message) {
-          setMessageLog(prevLog => prevLog.concat({
-            message,
-            participantType: "mentor"
-          }));
+          setMessageLog(prevLog => prevLog.concat(message));
         }
       }, 1750);
 
@@ -43,12 +37,10 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
 
   useEffect(() => {
     setIsSolutionSubmitted(false);
-    setMessageQueue(messageQueue.concat(currentStep.messages));
+    setMessageQueue(messageQueue.concat(currentStep.messages.map(message => ({ participantType: "mentor", message }))));
   }, [currentStep]);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messageLog]);
+
 
   useEffect(() => {
     setIsSQLConsoleOpen(false);
@@ -64,22 +56,11 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
     }
   }, [isSolutionSubmitted])
 
-  // Function to scroll to the bottom
-  const scrollToBottom = () => {
-    if (messageEndRef.current) {
-      messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+
 
   return (
     <>
-      <div className={"problem-step-view"}>
-        {messageLog.map((chatMessage, index) => (
-          <MessageBubble key={index} chatMessage={chatMessage} />
-        ))}
-        { messageQueue.length > 0 && <TypingAnimation/> }
-        <div ref={messageEndRef}/>
-      </div>
+      <MessageLogView messageLog={messageLog} messageQueue={messageQueue}/>
       {/*Only when it's time to do something...*/}
       { messageQueue.length == 0 && <button onClick={() => setIsSQLConsoleOpen(true)}>[Connect to Database] One moment...</button> }
       { isSQLConsoleOpen && <SQLConsole db={db} setIsSolutionSubmitted={setIsSolutionSubmitted} expectedRows={currentStep.expectedRows} /> }
