@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { PGlite } from "@electric-sql/pglite";
 import { Problem } from "../types/problem.ts";
-import { Repl } from "@electric-sql/pglite-repl";
 import { DEBUG, PROBLEM_SCHEMA } from "../config.ts";
 import { DebugToolbar } from "./DebugToolbar.tsx";
 import { ProblemStepView } from "./ProblemStepView.tsx";
@@ -47,7 +46,7 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
   return (
     <>
       <h4>{problem.title}</h4>
-      {currentStep ? <ProblemStepView db={db} currentStep={currentStep} onNextClicked={onNextClicked} /> : <Repl pg={db} />}
+      {currentStep && <ProblemStepView db={db} currentStep={currentStep} onNextClicked={onNextClicked} />}
       {DEBUG && <DebugToolbar onNextClicked={onNextClicked} />}
     </>
   );
