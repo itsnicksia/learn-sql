@@ -17,7 +17,7 @@ export function QueryInput({setQuery}: Props) {
       minHeight={16}
       className={"code-editor"}
       style={{
-        backgroundColor: '#202020',
+        backgroundColor: '#49454F',
         fontFamily: 'ui-monospace, SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace',
         fontSize: '1rem',
         fontWeight: 'bold',

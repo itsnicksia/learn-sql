@@ -1,11 +1,12 @@
 import {QueryResultData} from "../../types/query-result.ts";
+import "../../styles/SQLConsole.css";
 
 interface Props {
   queryResult: QueryResultData
 }
 
 export function QueryResultView({queryResult}: Props) {
-  return <div>
+  return <div className={"sql-console-result-view"}>
     <table>
       { queryResult.columnNames.map((columnName, index) => <th key={index}>{columnName}</th>) }
       <tbody>

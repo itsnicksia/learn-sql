@@ -57,8 +57,8 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   return (
     <>
       <MessageLogView messageLog={messageLog} messageQueue={messageQueue}/>
-      { messageQueue.length == 0 && <button onClick={() => setIsSQLConsoleOpen(true)}>[Connect to Database] One moment...</button> }
-      { isSQLConsoleOpen && <SQLConsole db={db} setIsSolutionSubmitted={setIsSolutionSubmitted} expectedRows={currentStep.expectedRows} /> }
+      { <button disabled={messageQueue.length !== 0} onClick={() => setIsSQLConsoleOpen(true)}>Connect to Database</button> }
+      { isSQLConsoleOpen && <SQLConsole db={db} setIsSolutionSubmitted={setIsSolutionSubmitted} expectedRows={currentStep.expectedRows} onCloseClicked={() => setIsSQLConsoleOpen(false)}/> }
     </>
   );
 }

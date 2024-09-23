@@ -1,8 +1,8 @@
 .sql-console {
     position: fixed;
 
-    width: 50vw; /* Adjust as needed */
-    height: 50vh; /* Adjust as needed */
+    width: 100%; /* Adjust as needed */
+    height: 75%; /* Adjust as needed */
 
     top: 50%;
     left: 50%;
@@ -10,7 +10,7 @@
 
     z-index: 1; /* You can adjust this if needed */
 
-    background-color: white;
+    background-color: #141218;
 
     /* Make the element a flex container */
     display: flex;
@@ -22,12 +22,14 @@
 
 .sql-console-query-input {
     display: flex;
+    flex-direction: column;
     width: 100%;
-    background-color: #242424;
+    background-color: #141218;
 }
 
-.fixed-width {
-    width: 50px;
+.sql-console-result-view {
+    background-color: #49454F;
+    color: #E6E0E9;
 }
 
 .flex-fill {
