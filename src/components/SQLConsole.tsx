@@ -8,11 +8,11 @@ import {QueryResultView} from "./molecule/QueryResults.tsx";
 
 interface Props {
   db: PGlite
-  setCompleted: Dispatch<SetStateAction<boolean>>
+  setIsSolutionSubmitted: Dispatch<SetStateAction<boolean>>
   expectedRows: string
 }
 
-export function SQLConsole({ db, setCompleted, expectedRows }: Props) {
+export function SQLConsole({ db, setIsSolutionSubmitted, expectedRows }: Props) {
   const [queryResult, setQueryQueryResult] = useState<QueryResult | null>(null);
   const [query, setQuery] = useState<string | null>(null);
 
@@ -66,7 +66,7 @@ export function SQLConsole({ db, setCompleted, expectedRows }: Props) {
     <div className={"sql-console"}>
       { renderResult(queryResult) }
       <QueryInput setQuery={setQuery} />
-      { canSendResult() && <button onClick={() => setCompleted(true)}>Send Results</button> }
+      { canSendResult() && <button onClick={() => setIsSolutionSubmitted(true)}>Send Results</button> }
     </div>
   );
 }

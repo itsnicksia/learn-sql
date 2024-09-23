@@ -5,6 +5,7 @@ import { ProblemStep } from "../types/problem.ts";
 import MessageBubble from "./molecule/MessageBubble.tsx";
 import '../styles/ProblemStepView.css';
 import { ChatMessage } from "../types/chat-message.ts";
+import TypingAnimation from "./atom/IsTypingAnimation.tsx";
 
 interface Props {
   db: PGlite;
@@ -13,7 +14,7 @@ interface Props {
 }
 
 export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [isSolutionSubmitted, setIsSolutionSubmitted] = useState(false);
   const [isSQLConsoleOpen, setIsSQLConsoleOpen] = useState(false);
   const [messageLog, setMessageLog] = useState<ChatMessage[]>([]);
   const [messageQueue, setMessageQueue] = useState<string[]>([]);
@@ -30,7 +31,7 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
         if (message) {
           setMessageLog(prevLog => prevLog.concat({
             message,
-            participantType: "narrator"
+            participantType: "mentor"
           }));
         }
       }, 1750);
@@ -41,7 +42,7 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   }, [messageQueue]);
 
   useEffect(() => {
-    setIsCompleted(false);
+    setIsSolutionSubmitted(false);
     setMessageQueue(messageQueue.concat(currentStep.messages));
   }, [currentStep]);
 
@@ -51,14 +52,17 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
 
   useEffect(() => {
     setIsSQLConsoleOpen(false);
-    if (isCompleted) {
+    if (isSolutionSubmitted) {
       setMessageLog(prevLog => prevLog.concat({
         message: currentStep.success,
         participantType: "user"
       }));
+      setMessageLog(prevLog => prevLog.concat({
+        participantType: "submittedResult"
+      }));
       onNextClicked();
     }
-  }, [isCompleted])
+  }, [isSolutionSubmitted])
 
   // Function to scroll to the bottom
   const scrollToBottom = () => {
@@ -73,11 +77,12 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
         {messageLog.map((chatMessage, index) => (
           <MessageBubble key={index} chatMessage={chatMessage} />
         ))}
+        { messageQueue.length > 0 && <TypingAnimation/> }
         <div ref={messageEndRef}/>
       </div>
       {/*Only when it's time to do something...*/}
-      <button onClick={() => setIsSQLConsoleOpen(true)}>[Connect to Database] One moment...</button>
-      { isSQLConsoleOpen && <SQLConsole db={db} setCompleted={setIsCompleted} expectedRows={currentStep.expectedRows} /> }
+      { messageQueue.length == 0 && <button onClick={() => setIsSQLConsoleOpen(true)}>[Connect to Database] One moment...</button> }
+      { isSQLConsoleOpen && <SQLConsole db={db} setIsSolutionSubmitted={setIsSolutionSubmitted} expectedRows={currentStep.expectedRows} /> }
     </>
   );
 }

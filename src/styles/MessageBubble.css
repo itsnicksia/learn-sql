@@ -17,11 +17,18 @@
     border-top-right-radius: 0;
 }
 
-.message-bubble.narrator {
+.message-bubble.mentor {
     background-color: #f1f0f0;
     color: black;
     align-self: flex-start;
     border-top-left-radius: 0;
+}
+
+.message-bubble.submittedResult {
+    background-color: #0084ff;
+    color: white;
+    align-self: flex-end;
+    border-top-right-radius: 0;
 }
 
 .message-bubble-container {
@@ -31,6 +38,10 @@
 }
 
 .message-bubble-container.user {
+    flex-direction: row-reverse;
+}
+
+.message-bubble-container.submittedResult {
     flex-direction: row-reverse;
 }
 
