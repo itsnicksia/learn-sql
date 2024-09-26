@@ -1,18 +1,15 @@
 import CodeEditor from "@uiw/react-textarea-code-editor";
-import {Dispatch, SetStateAction} from "react";
 interface Props {
-  setQuery: Dispatch<SetStateAction<string | null>>
+  setQueryBuffer: (value: string) => void
 }
 
-let queryBuffer = "";
-
-export function QueryInput({setQuery}: Props) {
+export function QueryInput({setQueryBuffer}: Props) {
 
   return <div className={"sql-console-query-input flex-fill"}>
     <CodeEditor
       language="sql"
       placeholder="Type your SQL database command here!"
-      onChange={(evn) => (queryBuffer = evn.target.value)}
+      onChange={(evn) => (setQueryBuffer(evn.target.value))}
       padding={15}
       minHeight={16}
       className={"code-editor"}
@@ -24,6 +21,5 @@ export function QueryInput({setQuery}: Props) {
         flexGrow: 1
       }}
     />
-    <button className={"fixed-width"} onClick={() => setQuery(queryBuffer)}>Execute Query</button>
   </div>
 }

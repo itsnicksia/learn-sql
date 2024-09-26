@@ -5,6 +5,7 @@ import { ProblemStep } from "../types/problem.ts";
 import '../styles/ProblemStepView.css';
 import { ChatMessage } from "../types/chat-message.ts";
 import {MessageLogView} from "./MessageLogView.tsx";
+import { ActionBar } from "./atom/ActionBar.tsx";
 
 interface Props {
   db: PGlite;
@@ -57,7 +58,7 @@ export function ProblemStepView({ db, currentStep, onNextClicked }: Props) {
   return (
     <>
       <MessageLogView messageLog={messageLog} messageQueue={messageQueue}/>
-      { <button disabled={messageQueue.length !== 0} onClick={() => setIsSQLConsoleOpen(true)}>Connect to Database</button> }
+      { messageQueue.length >= 0 && <ActionBar buttons={[{ text:"Connect to Database", onClick:() => setIsSQLConsoleOpen(true)}]}/> }
       { isSQLConsoleOpen && <SQLConsole db={db} setIsSolutionSubmitted={setIsSolutionSubmitted} expectedRows={currentStep.expectedRows} onCloseClicked={() => setIsSQLConsoleOpen(false)}/> }
     </>
   );

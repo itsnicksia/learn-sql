@@ -1,5 +1,5 @@
 import MessageBubble from "./molecule/MessageBubble.tsx";
-import TypingAnimation from "./atom/IsTypingAnimation.tsx";
+import TypingAnimation from "./atom/TypingAnimation.tsx";
 import {ChatMessage} from "../types/chat-message.ts";
 import {useEffect, useRef} from "react";
 

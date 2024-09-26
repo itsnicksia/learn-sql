@@ -5,6 +5,8 @@ import "../styles/SQLConsole.css";
 import {QueryInput} from "./molecule/QueryInput.tsx";
 import {QueryResult} from "../types/query-result.ts";
 import {QueryResultView} from "./molecule/QueryResults.tsx";
+import { SQLConsoleActionBar } from "./atom/SQLConsoleActionBar.tsx";
+import { ActionBar } from "./atom/ActionBar.tsx";
 
 interface Props {
   db: PGlite
@@ -12,6 +14,8 @@ interface Props {
   onCloseClicked: () => void
   expectedRows: string
 }
+
+let queryBuffer = "";
 
 export function SQLConsole({ db, setIsSolutionSubmitted, expectedRows, onCloseClicked }: Props) {
   const [queryResult, setQueryQueryResult] = useState<QueryResult | null>(null);
@@ -65,11 +69,14 @@ export function SQLConsole({ db, setIsSolutionSubmitted, expectedRows, onCloseCl
 
   return (
     <div className={"sql-console"}>
+      <h4>Helper Chat View Here</h4>
       {renderResult(queryResult)}
-      <QueryInput setQuery={setQuery} />
-      {/*move execute query button out*/}
-      <button onClick={onCloseClicked}>Hide</button>
-      <button disabled={!canSendResult()} onClick={() => setIsSolutionSubmitted(true)}>Send Results</button>
+      <QueryInput setQueryBuffer={(value) => queryBuffer = value} />
+      <ActionBar buttons={[
+        { text: "Hide",           onClick: onCloseClicked             },
+        { text: "Execute Query",  onClick:() => setQuery(queryBuffer) },
+        { text: "Send Results",   onClick: () => setIsSolutionSubmitted(true)}
+      ]}/>
     </div>
   );
 }
