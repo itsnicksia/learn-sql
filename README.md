@@ -8,3 +8,4 @@
 - Use Olympics dataset (pglite COPY)
 - Add more problems
 - Fix up CSS
+- Round buttons

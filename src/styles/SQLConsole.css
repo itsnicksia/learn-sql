@@ -24,12 +24,29 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height:50%;
     background-color: #141218;
 }
 
 .sql-console-result-view {
+    width: 100%;
+    height:50%;
     background-color: #49454F;
     color: #E6E0E9;
+
+    table {
+        width: 100%;           /* Optional: To make the table take full width */
+        border-collapse: collapse; /* Ensures borders are shared between cells */
+    }
+
+    table, th, td {
+        border: 1px solid black; /* Adds border to table, header (th), and cells (td) */
+    }
+
+    th, td {
+        padding: 10px;          /* Optional: Adds some padding inside the cells */
+        text-align: left;       /* Optional: Aligns text to the left */
+    }
 }
 
 .flex-fill {

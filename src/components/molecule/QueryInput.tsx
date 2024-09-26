@@ -11,7 +11,7 @@ export function QueryInput({setQuery}: Props) {
   return <div className={"sql-console-query-input flex-fill"}>
     <CodeEditor
       language="sql"
-      placeholder="It's SQL Time!"
+      placeholder="Type your SQL database command here!"
       onChange={(evn) => (queryBuffer = evn.target.value)}
       padding={15}
       minHeight={16}

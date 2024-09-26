@@ -65,9 +65,10 @@ export function SQLConsole({ db, setIsSolutionSubmitted, expectedRows, onCloseCl
 
   return (
     <div className={"sql-console"}>
-      <button onClick={onCloseClicked}>Close</button>
       {renderResult(queryResult)}
       <QueryInput setQuery={setQuery} />
+      {/*move execute query button out*/}
+      <button onClick={onCloseClicked}>Hide</button>
       <button disabled={!canSendResult()} onClick={() => setIsSolutionSubmitted(true)}>Send Results</button>
     </div>
   );
