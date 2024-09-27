@@ -1,4 +1,4 @@
-import '../../styles/MessageBubble.css';
+import '../organisms/MessageLogView.css';
 import csvIcon from '../../assets/csv-icon.png';
 import ReactMarkdown from "react-markdown";
 import {ChatMessage} from "../../types/chat-message.ts"; // Custom CSS for styling the bubbles
@@ -9,7 +9,7 @@ interface Props {
 
 function MessageBubble({ chatMessage }: Props) {
   const { participantType } = chatMessage;
-  const name = participantType === "mentor" ? "Ally McBeal" : "You";
+  const name = participantType === "mentor" ? "Deebee" : "You";
   return (
     <div className={`message-bubble-container ${participantType}`}>
       <div className="message-content">
@@ -18,7 +18,6 @@ function MessageBubble({ chatMessage }: Props) {
         </div>
         <div>
           <div className="name">{name}</div>
-          <div className="timestamp">{new Date().toISOString()}</div>
         </div>
       </div>
     </div>

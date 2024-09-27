@@ -1,0 +1,5 @@
+.query-input {
+    height: 100%;
+    overflow-y: auto;
+    background-color: var(--md3-secondary);
+}

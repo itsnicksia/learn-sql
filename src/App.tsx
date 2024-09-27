@@ -1,5 +1,5 @@
-import "./styles/App.css";
-import { ProblemView } from "./components/ProblemView.tsx";
+import "./App.css";
+import { ProblemView } from "./components/pages/ProblemView.tsx";
 import { useEffect, useState } from "react";
 
 import { problemIndex } from "./config/problem-index.ts";

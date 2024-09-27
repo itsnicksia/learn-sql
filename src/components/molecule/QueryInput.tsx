@@ -1,24 +1,25 @@
 import CodeEditor from "@uiw/react-textarea-code-editor";
+import "./QueryInput.css";
 interface Props {
   setQueryBuffer: (value: string) => void
 }
 
 export function QueryInput({setQueryBuffer}: Props) {
 
-  return <div className={"sql-console-query-input flex-fill"}>
+  return <div className={"query-input"}>
     <CodeEditor
       language="sql"
       placeholder="Type your SQL database command here!"
       onChange={(evn) => (setQueryBuffer(evn.target.value))}
-      padding={15}
-      minHeight={16}
+      padding={10}
+      minHeight={6}
       className={"code-editor"}
       style={{
-        backgroundColor: '#49454F',
+        backgroundColor: 'var(--md3-secondary)',
         fontFamily: 'ui-monospace, SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace',
         fontSize: '1rem',
         fontWeight: 'bold',
-        flexGrow: 1
+        overflowY: 'auto'
       }}
     />
   </div>

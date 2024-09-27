@@ -1,6 +1,6 @@
-import MessageBubble from "./molecule/MessageBubble.tsx";
-import TypingAnimation from "./atom/TypingAnimation.tsx";
-import {ChatMessage} from "../types/chat-message.ts";
+import MessageBubble from "../molecule/MessageBubble.tsx";
+import TypingAnimation from "../atom/TypingAnimation.tsx";
+import {ChatMessage} from "../../types/chat-message.ts";
 import {useEffect, useRef} from "react";
 
 interface Props {
@@ -23,7 +23,7 @@ export function MessageLogView({messageLog, messageQueue}: Props) {
   }, [messageLog]);
 
   return (
-    <div className={"problem-step-view"}>
+    <div className={"message-log-view"}>
       {messageLog.map((chatMessage, index) => (
         <MessageBubble key={index} chatMessage={chatMessage}/>
       ))}

@@ -1,0 +1,53 @@
+.sql-console {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--md3-secondary);
+    color: var(--md3-on-secondary);
+}
+
+button, .send-result {
+    background-color: var(--md3-success);
+    color: var(--md3-on-primary);
+    width: 100%;
+}
+
+button, .execute-query {
+    color: var(--md3-on-primary);
+    width: 100%;
+}
+
+.sql-console-query-input {
+    height: 50%;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+
+.sql-console-result-view {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 25vh;
+    font-size: 0.6rem;
+
+    table {
+        width: 100%;           /* Optional: To make the table take full width */
+        border-collapse: collapse; /* Ensures borders are shared between cells */
+    }
+
+    table, th, td {
+        border: 1px dotted var(--md3-secondary-dark); /* Adds border to table, header (th), and cells (td) */
+    }
+
+    th {
+        padding: 1px;          /* Optional: Adds some padding inside the cells */
+        text-align: center;       /* Optional: Aligns text to the left */
+        background-color: var(--md3-secondary-dark);
+    }
+
+    td {
+        padding: 1px;          /* Optional: Adds some padding inside the cells */
+        text-align: center;       /* Optional: Aligns text to the left */
+    }
+}

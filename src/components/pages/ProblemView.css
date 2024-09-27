@@ -1,0 +1,20 @@
+.problem-view {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--md3-background);
+    height: 100vh;
+
+    .title {
+        height: 2vh;
+        text-align: center;
+    }
+
+    .message-log-view {
+        overflow-y: auto;
+        height: 49vh;
+    }
+
+    .sql-console-view {
+        height: 49vh;
+    }
+}
