@@ -31,16 +31,13 @@ navigation:
   next: "coming-soon.yaml"
 steps:
   - messages:
-      - "Hello! Mind helping me with something?"
-      - "Seems like you're the only one with database access..."
+      - "Hello."
+      - "Welcome to Datacore Systems."
+      - "I am your friendly, non-violent learning assistant, Deebee."
       - |
-        Can you type in 
+        Let's test your SQL Console to make sure it's working.
         
-        `select * from bands` 
-        
-        and click `Go`? 
-        
-        plz plz plz
+        Type `select * from bands` in the console below and click the `Execute Query` button.
     expectedRows: |
       1,The Beatles,John Lennon,Rock
       2,Queen,Freddie Mercury,Rock
@@ -57,10 +54,9 @@ steps:
       13,The Eagles,Don Henley,Rock
       14,The Doors,Jim Morrison,Psychedelic Rock
       15,Radiohead,Thom Yorke,Alternative Rock
-    success: Here you go!
   # Objective: Teach "SELECT" - column
   - messages:
-      - Thanks!
+      - Excellent. Everything appears to be in working order.
       - Oh - by the way, the "`*`" in `select * from bands` means "everything"
       - As in, every column of the table (i.e. `band_name`, `lead_singer`)
       - So it basically says "Get me every (`*`) column from (the table) `bands`".

@@ -6,6 +6,6 @@
     margin: 20px 20px;
 
     .code-editor {
-        border-left: 2px solid var(--md3-secondary-dark);
+        border-left: 2px solid var(--md3-secondary-light);
     }
 }

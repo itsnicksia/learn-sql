@@ -1,14 +1,14 @@
 .typing-indicator {
     display: flex;
-    justify-content: left;
-    align-items: flex-start;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
 }
 
 .dot {
     width: 8px;
     height: 8px;
     margin: 0 3px;
-    border-radius: 50%;
     background-color: #333; /* Customize color here */
     animation: typing 1.5s infinite ease-in-out;
 }

@@ -52,10 +52,6 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
   useEffect(() => {
     if (currentStep && isSolutionSubmitted) {
       setMessageLog(prevLog => prevLog.concat({
-        message: currentStep.success,
-        participantType: "user"
-      }));
-      setMessageLog(prevLog => prevLog.concat({
         participantType: "submittedResult"
       }));
       onNextClicked();

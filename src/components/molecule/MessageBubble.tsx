@@ -32,7 +32,6 @@ function renderMessageBody(chatMessage: ChatMessage) {
     case "submittedResult":
       return <div>
         <img src={csvIcon} style={{height: "32px", width: "32px"}} alt="Your submitted report"/>
-        <span>results.csv</span>
       </div>
     case "tip":
     case "summary":
