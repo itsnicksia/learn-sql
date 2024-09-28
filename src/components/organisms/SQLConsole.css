@@ -4,6 +4,20 @@
     height: 100%;
     background-color: var(--md3-secondary);
     color: var(--md3-on-secondary);
+
+    /* Webkit browsers (Chrome, Safari, Edge) */
+    ::-webkit-scrollbar {
+        width: 6px; /* Width of the scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--md3-secondary); /* Background of the scrollbar track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--md3-secondary-light); /* Scrollbar color */
+    }
+
 }
 
 .sql-console-title {

@@ -1,5 +1,19 @@
 .message-log-view {
     text-align: center;
+
+    /* Webkit browsers (Chrome, Safari, Edge) */
+    ::-webkit-scrollbar {
+        width: 6px; /* Width of the scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--md3-secondary-light); /* Background of the scrollbar track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--md3-secondary); /* Scrollbar color */
+    }
+
 }
 
 .message-bubble {
@@ -67,3 +81,5 @@
     align-self: flex-end;
     margin-top: 5px;
 }
+
+

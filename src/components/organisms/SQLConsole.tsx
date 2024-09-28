@@ -88,9 +88,7 @@ export function SQLConsole({ db, setIsSolutionSubmitted, expectedRows }: Props) 
         <QueryInput setQueryBuffer={(value) => queryBuffer = value} />
         <div className={"action-bar"}>
           <button className={"execute-query"} onClick={() => setQuery(queryBuffer)}>Execute Query</button>
-          <button className={"send-result"} disabled={!canSendResult()} onClick={() => setIsSolutionSubmitted(true)}>Send
-            Result
-          </button>
+          <button className={"send-result"} disabled={!canSendResult()} onClick={() => setIsSolutionSubmitted(true)}>Send to Deebot</button>
         </div>
       </div>
     </div>
