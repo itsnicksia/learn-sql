@@ -68,21 +68,30 @@ export function SQLConsole({ db, setIsSolutionSubmitted, expectedRows }: Props) 
         return <></>
       case "correct":
       case "incorrect":
-        return <>
-          <QueryResultView queryResult={queryResult} />
-          <button className={"send-result"} disabled={!canSendResult()} onClick={() => setIsSolutionSubmitted(true)}>Send Result</button>
-        </>;
+        return <QueryResultView queryResult={queryResult} />;
     }
   }
 
   return (
     <div className={"sql-console"}>
       <div className={"sql-console-result-view"}>
-        { renderResult(queryResult) }
+        <div className={"sql-console-title"}>
+          <h4>Output</h4>
+        </div>
+        {renderResult(queryResult)}
+
       </div>
       <div className={"sql-console-query-input"}>
+        <div className={"sql-console-title"}>
+          <h4>Console</h4>
+        </div>
         <QueryInput setQueryBuffer={(value) => queryBuffer = value} />
-        <button className={"execute-query"} onClick={() => setQuery(queryBuffer)}>Execute Query</button>
+        <div className={"action-bar"}>
+          <button className={"execute-query"} onClick={() => setQuery(queryBuffer)}>Execute Query</button>
+          <button className={"send-result"} disabled={!canSendResult()} onClick={() => setIsSolutionSubmitted(true)}>Send
+            Result
+          </button>
+        </div>
       </div>
     </div>
   );

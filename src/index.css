@@ -20,7 +20,7 @@
     --md3-error: #d32f2f;           /* Red 700 */
     --md3-success: #388e3c;         /* Green 700 */
 
-    --md3-font-family: 'Roboto', 'Arial', sans-serif;
+    --md3-font-family: 'Quicksand', 'Arial', sans-serif;
     --md3-font-size-base: 16px;
     --md3-line-height: 1.5;
 }
@@ -35,10 +35,11 @@
 html, body {
     height: 100%;
     font-family: var(--md3-font-family);
+    font-weight: 400;
     font-size: var(--md3-font-size-base);
     line-height: var(--md3-line-height);
     color: var(--md3-on-background);
-    background-color: var(--md3-background);
+    background-color: #081013;
 }
 
 /* Links */
@@ -56,9 +57,14 @@ button {
     background-color: var(--md3-primary);
     color: var(--md3-on-primary);
     border: none;
-    padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: 'Quicksand', 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    max-width: 200px;
+    height: 40px;
 }
 
 button:hover {

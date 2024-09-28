@@ -7,14 +7,16 @@
     .title {
         height: 2vh;
         text-align: center;
+        border-bottom: 1px solid var(--md3-border); /* You can adjust the width, style, and color */
+        margin: 0 10vw;
     }
 
     .message-log-view {
         overflow-y: auto;
-        height: 49vh;
+        height: 44vh;
     }
 
     .sql-console-view {
-        height: 49vh;
+        height: 54vh;
     }
 }

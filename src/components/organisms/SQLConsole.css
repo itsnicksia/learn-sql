@@ -6,37 +6,65 @@
     color: var(--md3-on-secondary);
 }
 
-button, .send-result {
+.sql-console-title {
+    height: 2vh;
+    text-align: center;
+    margin: 0 10vw;
+
+    h4 {
+        color: var(--md3-on-primary);
+    }
+}
+
+.action-bar {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    bottom: 1vw;
+}
+
+.send-result {
     background-color: var(--md3-success);
     color: var(--md3-on-primary);
     width: 100%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5); /* Drop shadow */
+    position: absolute;
+    right: 1.5vw;
 }
 
-button, .execute-query {
+.execute-query {
     color: var(--md3-on-primary);
     width: 100%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5); /* Drop shadow */
+    margin: auto;
 }
 
 .sql-console-query-input {
-    height: 50%;
+    height: 29vh;
     justify-content: flex-end;
     display: flex;
     flex-direction: column;
 }
 
-.sql-console-result-view {
-    display: flex;
-    flex-direction: column;
+.sql-console-result-table {
     overflow-y: auto;
-    height: 25vh;
-    font-size: 0.6rem;
 
     table {
+        font-size: 0.85rem;
         width: 100%;           /* Optional: To make the table take full width */
         border-collapse: collapse; /* Ensures borders are shared between cells */
+        font-family: 'ui-monospace', 'SFMono-Regular', 'SF Mono', 'Consolas', 'Liberation Mono', 'Menlo', 'monospace';
     }
 
-    table, th, td {
+    th {
+        border: 1px dotted var(--md3-secondary-dark); /* Adds border to table, header (th), and cells (td) */
+        font-size: 1.2rem;
+    }
+
+    td {
         border: 1px dotted var(--md3-secondary-dark); /* Adds border to table, header (th), and cells (td) */
     }
 
@@ -50,4 +78,13 @@ button, .execute-query {
         padding: 1px;          /* Optional: Adds some padding inside the cells */
         text-align: center;       /* Optional: Aligns text to the left */
     }
+}
+
+.sql-console-result-view {
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+
+    border-top: 2px solid var(--md3-secondary-dark); /* You can adjust the width, style, and color */
+    border-bottom: 1px dotted var(--md3-secondary-dark); /* You can adjust the width, style, and color */
 }

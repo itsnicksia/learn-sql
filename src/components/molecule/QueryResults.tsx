@@ -6,7 +6,7 @@ interface Props {
 }
 
 export function QueryResultView({queryResult}: Props) {
-  return <div className={"sql-console-result-view"}>
+  return <div className={"sql-console-result-table"}>
     { queryResult && <table>
         { queryResult.columnNames.map((columnName, index) => <th key={index}>{columnName}</th>) }
         <tbody>
