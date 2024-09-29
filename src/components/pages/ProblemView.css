@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     background-color: var(--md3-background);
-    height: 100vh;
+    height: 100dvh;
 
     .title {
-        height: 2vh;
+        height: 2dvh;
         text-align: center;
         border-bottom: 1px solid var(--md3-border); /* You can adjust the width, style, and color */
         margin: 0 10vw;
@@ -13,10 +13,10 @@
 
     .message-log-view {
         overflow-y: auto;
-        height: 44vh;
+        height: 44dvh;
     }
 
     .sql-console-view {
-        height: 54vh;
+        height: 54dvh;
     }
 }
