@@ -52,7 +52,6 @@ a:hover {
     color: var(--md3-primary-dark);
 }
 
-/* Buttons */
 button {
     background-color: var(--md3-primary);
     color: var(--md3-on-primary);
@@ -61,10 +60,18 @@ button {
     transition: background-color 0.3s ease;
     font-family: 'Quicksand', 'Arial', sans-serif;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     border-radius: 25px;
-    max-width: 200px;
-    height: 40px;
+    max-width: 30dvw;
+    height: 4dvh;
+}
+
+
+/* Buttons */
+@media (min-width: 1024px) {
+    button {
+        max-width: 250px; /* Adjust max-width for desktop */
+    }
 }
 
 button:hover {
