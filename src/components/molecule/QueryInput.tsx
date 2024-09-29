@@ -17,7 +17,7 @@ export function QueryInput({setQueryBuffer}: Props) {
       style={{
         backgroundColor: 'var(--md3-secondary)',
         fontFamily: 'ui-monospace, SFMono-Regular, SF Mono, Consolas, Liberation Mono, Menlo, monospace',
-        fontSize: '1rem',
+        fontSize: '0.9rem',
         fontWeight: 'bold',
         overflowY: 'auto'
       }}
