@@ -11,7 +11,7 @@ export function QueryInput({setQueryBuffer}: Props) {
       language="sql"
       placeholder="Type your SQL database command here!"
       onChange={(evn) => (setQueryBuffer(evn.target.value))}
-      padding={10}
+      padding={5}
       minHeight={6}
       className={"code-editor"}
       style={{
