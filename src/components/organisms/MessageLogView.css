@@ -39,6 +39,8 @@
 .message-bubble.submittedResult {
     background-color: #0084ff;
     color: white;
+    width: 10%;
+    box-sizing: content-box;
 }
 
 .message-bubble-container {

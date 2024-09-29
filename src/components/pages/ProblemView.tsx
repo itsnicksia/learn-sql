@@ -23,7 +23,10 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
   const currentStep = problem.steps && problem.steps[stepIndex];
 
   useEffect(() => {
-    setMessageLog([]);
+    setMessageLog([{
+      participantType: "mentor",
+      message: "Welcome to Deedee Systems.",
+    }]);
   }, []);
 
   useEffect(() => {
@@ -32,7 +35,7 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
       if (message) {
         setMessageLog(prevLog => prevLog.concat(message));
       }
-    }, 1750);
+    }, 1850);
 
     return () => {
       clearInterval(messagePoller);

@@ -76,19 +76,13 @@
     th {
         border: 1px dotted var(--md3-secondary-dark); /* Adds border to table, header (th), and cells (td) */
         font-size: 1.2rem;
-    }
-
-    td {
-        border: 1px dotted var(--md3-secondary-dark); /* Adds border to table, header (th), and cells (td) */
-    }
-
-    th {
         padding: 1px;          /* Optional: Adds some padding inside the cells */
         text-align: center;       /* Optional: Aligns text to the left */
         background-color: var(--md3-secondary-dark);
     }
 
     td {
+        border: 1px dotted var(--md3-secondary-dark); /* Adds border to table, header (th), and cells (td) */
         padding: 1px;          /* Optional: Adds some padding inside the cells */
         text-align: center;       /* Optional: Aligns text to the left */
     }
