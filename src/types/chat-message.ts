@@ -1,4 +1,6 @@
+export type MessageType = "user" | "mentor" | "submittedResult" | "tip" | "summary" | "important"
+
 export interface ChatMessage {
-  participantType: "user" | "mentor" | "submittedResult" | "tip" | "summary"
+  messageType: MessageType
   message?: string
 }

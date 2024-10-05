@@ -23,7 +23,7 @@ export function MessageLogView({messageLog, messageQueue}: Props) {
   }, [messageLog]);
 
   return (
-    <div className={"message-log-view"}>
+    <div className={"message-log-view-2"}>
       {messageLog.map((chatMessage, index) => (
         <MessageBubble key={index} chatMessage={chatMessage}/>
       ))}

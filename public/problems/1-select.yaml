@@ -102,17 +102,19 @@ setupQuery: |
   (84, 'Slovakia', 'SVK', 0, 0, 1, 1),
   (84, 'Zambia', 'ZAM', 0, 0, 1, 1);
 
-title: "Chapter 1: Welcome to SQL!"
+title: "Chapter 1 - Databases!"
 
 navigation:
   next: "coming-soon.yaml"
 steps:
   - messages:
-      - "I'm your friendly, non-violent learning assistant, Deebee."
-      - "We're working with a real database today, running right on your phone or computer or whatever."
-      - "Anyway, let's test your [`Console`] to make sure it's working."
-      - "Type `select * from medals` in the [`Console`] below and click the `Execute Query` button."
-      - "When you see some results in the [`Output`] section and click `Send to Deebot`."
+      - message: "I'm your friendly, non-violent learning assistant, Deebee."
+      - message: "We're working with a real database today, running right on your phone or computer or whatever."
+      - message: "Anyway, let's test your [`Console`] to make sure it's working."
+      - message: "Type `select * from medals` in the [`Console`] below and click the `Execute Query` button."
+        messageType: important
+      - message: "When you see some results in the [`Output`] section and click `Send to Deebot`."
+        messageType: important
     expectedRows:  |
       1,United States,US,40,44,42,126
       2,China,CHN,40,27,24,91

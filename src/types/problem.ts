@@ -1,3 +1,5 @@
+import { MessageType } from "./chat-message.ts";
+
 export interface Problem {
   setupQuery: string;
   title: string;
@@ -5,8 +7,13 @@ export interface Problem {
   navigation: Navigation;
 }
 
+export interface ProblemStepMessage {
+  message: string
+  messageType?: MessageType
+}
+
 export interface ProblemStep {
-  messages: string[];
+  messages: ProblemStepMessage[];
   expectedRows: string;
   success: string;
 }

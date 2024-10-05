@@ -24,7 +24,7 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
 
   useEffect(() => {
     setMessageLog([{
-      participantType: "mentor",
+      messageType: "mentor",
       message: "Welcome to Deedee Systems.",
     }]);
   }, []);
@@ -46,8 +46,8 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
     if (currentStep) {
       setIsSolutionSubmitted(false);
       setMessageQueue(messageQueue.concat(currentStep.messages.map(message => ({
-        participantType: "mentor",
-        message
+        messageType: message.messageType ?? "mentor",
+        message: message.message
       }))));
     }
   }, [currentStep]);
@@ -55,7 +55,7 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
   useEffect(() => {
     if (currentStep && isSolutionSubmitted) {
       setMessageLog(prevLog => prevLog.concat({
-        participantType: "submittedResult"
+        messageType: "submittedResult"
       }));
       onNextClicked();
     }
@@ -94,7 +94,7 @@ export function ProblemView({ problem, setProblemPath, db }: Props) {
       <div className={"title"}>
         <h4>{problem.title}</h4>
       </div>
-      <div className={"message-log-view"}>
+      <div className={"message-log-view-1"}>
         <MessageLogView messageLog={messageLog} messageQueue={messageQueue}/>
       </div>
       <div className={"sql-console-view"}>

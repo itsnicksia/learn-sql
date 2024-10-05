@@ -8,12 +8,13 @@ interface Props {
 }
 
 function MessageBubble({ chatMessage }: Props) {
-  const { participantType } = chatMessage;
-  const name = participantType === "mentor" ? "Deebee" : "You";
+  const { messageType } = chatMessage;
+  const name = messageType === "mentor" ? "Deebee" : "You";
+
   return (
-    <div className={`message-bubble-container ${participantType}`}>
+    <div className={`message-bubble-container ${messageType}`}>
       <div className="message-content">
-        <div className={`message-bubble ${participantType}`}>
+        <div className={`message-bubble ${messageType}`}>
           { renderMessageBody(chatMessage) }
         </div>
         <div>
@@ -25,9 +26,10 @@ function MessageBubble({ chatMessage }: Props) {
 }
 
 function renderMessageBody(chatMessage: ChatMessage) {
-  switch (chatMessage.participantType) {
+  switch (chatMessage.messageType) {
     case "user":
     case "mentor":
+    case "important":
       return <ReactMarkdown children={chatMessage.message}/>
     case "submittedResult":
       return <div>
@@ -35,7 +37,7 @@ function renderMessageBody(chatMessage: ChatMessage) {
       </div>
     case "tip":
     case "summary":
-      return <p>Error: {chatMessage.participantType} messages not yet implemented!</p>
+      return <p>Error: {chatMessage.messageType} messages not yet implemented!</p>
   }
 }
 
